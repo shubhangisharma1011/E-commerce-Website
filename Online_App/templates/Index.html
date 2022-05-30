@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Index Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+      body {
+        font-family: "Lato", sans-serif;
+      }
+
+      .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+      }
+
+      .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+      }
+
+      .sidenav a:hover {
+        color: #f1f1f1;
+      }
+
+      .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+      }
+
+      @media screen and (max-height: 450px) {
+        .sidenav {
+          padding-top: 15px;
+        }
+
+        .sidenav a {
+          font-size: 18px;
+        }
+      }
+
+      .gallery {
+        border: 3px solid blue;
+        border-radius: 20px;
+      }
+
+      .responcive {
+        width: 33%;
+        float: left;
+        padding: 0 10px;
+      }
+
+      @media only screen and (max-width: 700px) {
+        .responcive {
+          width: 33%;
+        }
+      }
+
+      @media only screen and (max-width:500px) {
+        .responcive {
+          width: 33%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse" style="margin-bottom:0;">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+          </a>
+          <a class="navbar-brand" href="#" style="font-size:26px;">OnlineShop</a>
+          <a class="navbar-brand" href="https://i.pinimg.com/280x280_RS/ef/8e/93/ef8e93cbbf3846305b6cd02aae60ccff.jpg" target="_blank">
+            <img src="https://i.pinimg.com/280x280_RS/ef/8e/93/ef8e93cbbf3846305b6cd02aae60ccff.jpg" style="width:30px; height:30px;">
+          </a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="#">Home</a>
+          </li>
+        </ul>
+        <form class="navbar-form navbar-left" action="">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" name="search">
+            <div class="input-group-btn">
+              <button class="btn btn-default" type="submit">
+                <i class="glyphicon glyphicon-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <ul class="nav navbar-nav">
+          <a href="{% url 'Login_View'%}">
+            <button type="button" class="btn btn-success" style="margin-top:2px;">Login</button>
+          </a>
+        </ul>
+        <ul class="nav navbar-nav">
+          <a href="{%url 'Registration_View'%}">
+            <button type="button" class="btn btn-danger" style="margin-top:2px;">Register</button>
+          </a>
+        </ul>
+        <a href="#" class="fa fa-bell" style="font-size:40px;color:white; margin-left:30%; margin-top:5px;text-decoration: none;"></a>
+        <a href="#" class="fa fa-shopping-cart" style="font-size:40px;color:white; margin-left:10px;text-decoration: none;"></a>
+      </div>
+    </nav>
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Clients</a>
+      <a href="#">Contact</a>
+    </div>
+    <script>
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+      }
+
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+      }
+    </script>
+    <!--CAROUSEL-->
+    <div class="carousel" id="c1" data-ride="carousel" style="margin-top:0;">
+      <ul class="carousel-indicators">
+        <li data-target="#c1" data-slide-to="0" class="active"></li>
+        <li data-target="#c1" data-slide-to="1"></li>
+        <li data-target="#c1" data-slide-to="2"></li>
+        <li data-target="#c1" data-slide-to="3"></li>
+        <li data-target="#c1" data-slide-to="4"></li>
+        <li data-target="#c1" data-slide-to="5"></li>
+      </ul>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="https://images.unsplash.com/photo-1583316174775-bd6dc0e9f298?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y2xvdGhlcyUyMHNob3B8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80" alt="imgbreak" style="width: 100%; height: 500px;">
+        </div>
+        <div class="carousel-item">
+          <img src="https://images.unsplash.com/photo-1582719188393-bb71ca45dbb9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGRyZXNzJTIwc2hvcHBpbmd8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80" alt="imgbreak" style="width: 100%; height: 500px;">
+        </div>
+        <div class="carousel-item">
+          <img src="http://cdn1.ninecolours.com/image/WeddingLaganCollection/lagn.jpg" alt="imgbreak" style="width: 100%; height: 500px;">
+        </div>
+        <div class="carousel-item">
+          <img src="https://images.unsplash.com/photo-1557821552-17105176677c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8b25saW5lJTIwc2hvcHBpbmd8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80" alt="imgbreak" style="width: 100%; height: 500px;">
+        </div>
+        <div class="carousel-item">
+          <img src="https://images.cbazaar.com/pl_images/bannerimages/SMP_MPB_mar21_3.jpg" alt="imgbreak" style="width: 100%; height: 500px;">
+        </div>
+        <div class="carousel-item">
+          <img src="https://medias.utsavfashion.com/media/wysiwyg/promotions/2019/1912/plus-size-salwar-suits-mobile-hs.jpg" alt="imgbreak" style="width: 100%; height: 500px;">
+        </div>
+      </div>
+      <a href="#c1" class="carousel-control-prev" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a href="#c1" class="carousel-control-next" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
+    </div>
+    <!--ALIGIN 3 IMAGES --> {% for tables in table %} <div class="responcive">
+      <div class="gallery">
+        <a href="#">
+          <img src="/media/{{tables.index_image}}" alt="imgbreak" height="300" width="100%" style="border-radius:20px;">
+        </a>
+        <center>
+          <a href="{% url 'Login_View'%}" class="btn btn-danger" role="button" style="width:100%; border-radius:20px;">Shop Now</a>
+        </center>
+      </div>
+    </div> {% endfor %}
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <div></div>
+  </body>
+</html>

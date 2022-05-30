@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        table,th,tr,td{
+        border: 1px solid black;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Employee Table</title>
+</head>
+<body>
+<table>
+    <th>First Name</th>
+    <th>Middle Name</th>
+    <th>Last Name</th>
+    <th>Address</th>
+    <th>Experience</th>
+    <th>Designation</th>
+    <th>Month Salary</th>
+    <th>ID</th>
+    <th>Annum Salary</th>
+    <th>Provident Fund</th>
+    <th>Telephone</th>
+    <th>Mobile</th>
+    <th>Email</th>
+    <th>Tax</th>
+    <th>DOB</th>
+    <th>Country</th>
+    <th>State</th>
+    <th>City</th>
+    <th>District</th>
+    {% for forms in form %}
+    <tr>
+        <td>{{forms.manager_firstname}}</td>
+        <td>{{forms.manager_middlename}}</td>
+        <td>{{forms.manager_lastname}}</td>
+        <td>{{forms.manager_address}}</td>
+        <td>{{forms.manager_experience}}</td>
+        <td>{{forms.manager_designation}}</td>
+        <td>{{forms.manager_monthlysalary}}</td>
+        <td>{{forms.manager_id}}</td>
+        <td>{{forms.manager_per_annum_salary}}</td>
+        <td>{{forms.manager_pf}}</td>
+        <td>{{forms.manager_telephone}}</td>
+        <td>{{forms.manager_mobile}}</td>
+        <td>{{forms.manager_email}}</td>
+        <td>{{forms.manager_tax}}</td>
+        <td>{{forms.manager_dob}}</td>
+        <td>{{forms.manager_country}}</td>
+        <td>{{forms.manager_state}}</td>
+        <td>{{forms.manager_city}}</td>
+        <td>{{forms.manager_district}}</td>
+
+    </tr>
+    {% endfor %}
+
+</table>
+</body>
+</html>

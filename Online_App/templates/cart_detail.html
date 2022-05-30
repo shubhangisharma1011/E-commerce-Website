@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Your Cart</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+      }
+
+      .navbar {
+        overflow: hidden;
+        background-color: #333;
+        position: fixed;
+        top: 0;
+        width: 100%;
+      }
+
+      .navbar a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+      }
+
+      .navbar a:hover {
+        background: #ddd;
+        color: black;
+      }
+
+      .main {
+        padding: 16px;
+        margin-top: 30px;
+        height: 1500px;
+        /* Used in this example to enable scrolling */
+      }
+
+      .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        margin: auto;
+        text-align: center;
+        font-family: arial;
+      }
+
+      .price {
+        color: grey;
+        font-size: 22px;
+      }
+
+      .card button {
+        border: none;
+        outline: 0;
+        padding: 12px;
+        color: white;
+        background-color: #000;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+      }
+
+      .card button:hover {
+        opacity: 0.7;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <a class="navbar-brand" href="#" style="font-size:25px; margin-top:5px;">
+        <b>OnlineShop</b>
+      </a>
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a href="{{user.file.url}}" target="_blank">
+            <img src="{{user.file.url}}" style="width:40px; margin-top:5px;
+          height:40px; border-radius:40%;">
+          </a>
+        </li>
+        <li>
+          <a href="#">{{request.user.first_name}}&nbsp&nbsp{{request.user.last_name}}</a>
+        </li>
+        <li class="w3-xlarge" style="font-size:50px; color:white; text-decoration: none;">
+          <a href="{% url 'Home_View'%}" class="material-icons w3-xlarge">home</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="{%url 'Logout_View'%}">
+            <span class="glyphicon glyphicon-log-in" style="margin-top:12px; font-size:25px; color:white;"></span> Logout </a>
+        </li>
+      </ul>
+    </div>
+    <div class="navbar">
+      <a class="navbar-brand" href="#" style="font-size:25px; margin-top:5px;">
+        <b>OnlineShop</b>
+      </a>
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a href="{{user.file.url}}" target="_blank">
+            <img src="{{user.file.url}}" style="width:40px; margin-top:5px;
+          height:40px; border-radius:40%;">
+          </a>
+        </li>
+        <li>
+          <a href="#">{{request.user.first_name}}&nbsp&nbsp{{request.user.last_name}}</a>
+        </li>
+        <li class="w3-xlarge" style="font-size:50px; color:white; text-decoration: none;">
+          <a href="{% url 'Home_View'%}" class="material-icons w3-xlarge">home</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="{% url 'cart_clear' %}" style="font-size:20px; color:white;">
+            <button style="background-color:red; padding:10px; margin-right:10px;">Clear Cart</button>
+          </a>
+        </li>
+        <li>
+          <a href="{%url 'Logout_View'%}">
+            <span class="glyphicon glyphicon-log-in" style="margin-top:8px; font-size:25px; color:white;"></span> Logout </a>
+        </li>
+      </ul>
+    </div> {% load cart_tag %}
+    <!--for check the length of cart -->
+    <!--Total Length :: {{request.session.cart|length}}<br>--> {% for key,value in request.session.cart.items %} <div style="margin-top:20px; margin-left:20px; margin-right:20px;">
+      <div class="card" style="margin-top:6%; margin-left:10px; float:left; width:250px;">
+        <img src="{{value.image}}" alt="Denim Jeans" style="width:200px; height:200px;">
+        <h4>{{value.name}}</h4>
+        <p class="price">
+          <i class="fa fa-rupee">{{value.price}}</i>
+        </p>
+        <h4>Quantity: {{value.quantity}}</h4>
+        <p class="price">
+          <i class="fa fa-rupee">Total {{ value.price|multiply:value.quantity }}</i>
+        </p>
+        <form action="" method="POST">
+          <button>
+            <a style="color:white;" href="{% url 'item_increment' value.product_id %}">Add</a>
+          </button>
+          <button>
+            <a style="color:white;" href="{% url 'item_decrement' value.product_id %}">Remove</a>
+          </button>
+        </form>
+        <a href="{% url 'checkout' %}">
+          <button>Buy Now</button>
+        </a>
+      </div>
+    </div> {% endfor %}
+    <!--
+{% for key,value in request.session.cart.items %}
+Product Name: {{value.name}} Product Prize: {{value.price}} <img src="{{value.image}}"><br> Total {{ value.price|multiply:value.quantity }}
+{% endfor %} -->
+    <a href="{% url 'Home_View' %}">Back to Home</a>
+  </body>
+</html>

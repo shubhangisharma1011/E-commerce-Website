@@ -1,0 +1,318 @@
+{% load cart_tag %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Checkout</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style type="text/css">
+      #snackbar {
+        visibility: hidden;
+        /* Hidden by default. Visible on click */
+        min-width: 250px;
+        /* Set a default minimum width */
+        margin-left: -125px;
+        /* Divide value of min-width by 2 */
+        background-color: #333;
+        /* Black background color */
+        color: #fff;
+        /* White text color */
+        text-align: center;
+        /* Centered text */
+        border-radius: 2px;
+        /* Rounded borders */
+        padding: 16px;
+        /* Padding */
+        position: fixed;
+        /* Sit on top of the screen */
+        z-index: 1;
+        /* Add a z-index if needed */
+        left: 50%;
+        /* Center the snackbar */
+        bottom: 30px;
+        /* 30px from the bottom */
+      }
+
+      #snackbar.show {
+        visibility: visible;
+        /* Show the snackbar */
+        /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+      However, delay the fade out process for 2.5 seconds */
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      }
+
+      /* Animations to fade the snackbar in and out */
+      @-webkit-keyframes fadein {
+        from {
+          bottom: 0;
+          opacity: 0;
+        }
+
+        to {
+          bottom: 30px;
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadein {
+        from {
+          bottom: 0;
+          opacity: 0;
+        }
+
+        to {
+          bottom: 30px;
+          opacity: 1;
+        }
+      }
+
+      @-webkit-keyframes fadeout {
+        from {
+          bottom: 30px;
+          opacity: 1;
+        }
+
+        to {
+          bottom: 0;
+          opacity: 0;
+        }
+      }
+
+      @keyframes fadeout {
+        from {
+          bottom: 30px;
+          opacity: 1;
+        }
+
+        to {
+          bottom: 0;
+          opacity: 0;
+        }
+      }
+
+      html,
+      body {
+        height: 100%;
+        background-color: #152733;
+      }
+
+      .form-holder {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        min-height: 100vh;
+      }
+
+      .form-holder .form-content {
+        position: relative;
+        text-align: center;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-align-items: center;
+        align-items: center;
+        padding: 60px;
+      }
+
+      .form-content .form-items {
+        border: 3px solid #fff;
+        padding: 40px;
+        display: inline-block;
+        width: 100%;
+        min-width: 540px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        text-align: left;
+        -webkit-transition: all 0.4s ease;
+        transition: all 0.4s ease;
+      }
+
+      .form-content h3 {
+        color: #fff;
+        text-align: left;
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+
+      .form-content h3.form-title {
+        margin-bottom: 30px;
+      }
+
+      .form-content p {
+        color: #fff;
+        text-align: left;
+        font-size: 17px;
+        font-weight: 300;
+        line-height: 20px;
+        margin-bottom: 30px;
+      }
+
+      .form-content label,
+      .was-validated .form-check-input:invalid~.form-check-label,
+      .was-validated .form-check-input:valid~.form-check-label {
+        color: #fff;
+      }
+
+      .form-content input[type=text],
+      .form-content input[type=password],
+      .form-content input[type=email],
+      .form-content select {
+        width: 100%;
+        padding: 9px 20px;
+        text-align: left;
+        border: 0;
+        outline: 0;
+        border-radius: 6px;
+        background-color: #fff;
+        font-size: 15px;
+        font-weight: 300;
+        color: #8D8D8D;
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+        margin-top: 16px;
+      }
+
+      .btn-primary {
+        background-color: #6C757D;
+        outline: none;
+        border: 0px;
+        box-shadow: none;
+      }
+
+      .btn-primary:hover,
+      .btn-primary:focus,
+      .btn-primary:active {
+        background-color: #495056;
+        outline: none !important;
+        border: none !important;
+        box-shadow: none;
+      }
+
+      .form-content textarea {
+        position: static !important;
+        width: 100%;
+        padding: 8px 20px;
+        border-radius: 6px;
+        text-align: left;
+        background-color: #fff;
+        border: 0;
+        font-size: 15px;
+        font-weight: 300;
+        color: #8D8D8D;
+        outline: none;
+        resize: none;
+        height: 120px;
+        -webkit-transition: none;
+        transition: none;
+        margin-bottom: 14px;
+      }
+
+      .form-content textarea:hover,
+      .form-content textarea:focus {
+        border: 0;
+        background-color: #ebeff8;
+        color: #8D8D8D;
+      }
+
+      .mv-up {
+        margin-top: -9px !important;
+        margin-bottom: 8px !important;
+      }
+
+      .invalid-feedback {
+        color: #ff606e;
+      }
+
+      .valid-feedback {
+        color: #2acc80;
+      }
+    </style>
+  </head>
+  <body>
+    <center>
+      <div id="snackbar">Data Submitted Succsessfully</div> {% for key,value in request.session.cart.items %} <nav aria-label="breadcrumb">
+        <div class="breadcrumb mt-3">
+          <p class="breadcrumb-item active" aria-current="page">Your Cart Total Is <b>Rs.{{value.price|multiply:value.quantity}} Because you choose the {{value.quantity}} Quantity <span id="totalPrice"></span>
+            </b>. Enter your details below & place your order. </p>
+        </div>
+      </nav>
+      <form action="" method="POST" novalidate> {% csrf_token %} <div class="form-body">
+          <div class="row">
+            <div class="form-holder">
+              <div class="form-content">
+                <div class="form-items">
+                  <h3>Shipping Address Details</h3>
+                  <p>Please Fill correct Details.</p>
+                  <center>
+                    <div class="col-md-12">
+                      <label for="items_json" class="label"></label>
+                      <input class="form-control" id="items_json" name="items_json" type="text" placeholder="Selected Item" value="{{value.name}}" readonly>
+                      <div class="valid-feedback">Product You Buy</div>
+                    </div>
+                    <div class="group">
+                      <label for="amount" class="label"></label>
+                      <input type="text" id="amount" name="amount" value="{{value.price|multiply:value.quantity}}" readonly style="font-size:20px; border-radius:10px;">
+                    </div>
+                    <div class="col-md-12">
+                      <label for="name" class="label"></label>
+                      <input class="form-control" name="name" id="name" type="text" placeholder="Full Name" required>
+                    </div>
+                    <div class="col-md-12">
+                      <label for="email" class="label"></label>
+                      <input class="form-control" id="email" type="email" name="email" placeholder="E-mail Address" required>
+                    </div>
+                    <div class="col-md-12">
+                      <label for="address" class="label"></label>
+                      <input class="form-control" id="address" type="text" name="address" placeholder="Full Address" required>
+                      <div class="valid-feedback"></div>
+                    </div>
+                    <div class="col-md-12">
+                      <label for="state" class="label"></label>
+                      <input class="form-control" id="state" type="text" name="state" placeholder="Enter State" required>
+                    </div>
+                    <div class="col-md-12">
+                      <label for="city" class="label"></label>
+                      <input class="form-control" id="city" type="text" name="city" placeholder="Enter City" required>
+                    </div>
+                    <div class="col-md-12">
+                      <label for="zip_code" class="label"></label>
+                      <input class="form-control" type="text" id="zip_code" type="text" name="zip_code" placeholder="Area Zip Code" required>
+                      <div class="invalid-feedback">Please fill correct zip code!</div>
+                    </div>
+                    <div class="col-md-12">
+                      <label for="phone" class="label"></label>
+                      <input class="form-control" id="phone" type="text" name="phone" placeholder="Enter 10 digit Mobile number" required>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                      <label class="form-check-label">I confirm that all data are correct</label>
+                      <div class="invalid-feedback">Please confirm that the entered data are all correct!</div>
+                    </div>
+                    <div class="form-button mt-3">
+                      <button onclick="myFunction()">Payment</button>
+                    </div></center></div></div></div></div></div>
+      </form>
+    {% endfor %}
+    </center>
+    <script type="text/javascript">
+      function myFunction() {
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function() {
+          x.className = x.className.replace("show", "");
+        }, 9000);
+      }
+    </script>
+  </body>
+</html>

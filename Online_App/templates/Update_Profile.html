@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Title</title>
+    <style>
+      body {
+        font-family: "Lato", sans-serif;
+      }
+
+      .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+      }
+
+      .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+      }
+
+      .sidenav a:hover {
+        color: #f1f1f1;
+      }
+
+      .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+      }
+
+      #main {
+        transition: margin-left .5s;
+        padding: 16px;
+      }
+
+      @media screen and (max-height: 450px) {
+        .sidenav {
+          padding-top: 15px;
+        }
+
+        .sidenav a {
+          font-size: 18px;
+        }
+      }
+
+      .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        margin: auto;
+        text-align: center;
+        font-family: arial;
+      }
+
+      .price {
+        color: grey;
+        font-size: 22px;
+      }
+
+      .card button {
+        border: none;
+        outline: 0;
+        padding: 12px;
+        color: white;
+        background-color: #000;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+      }
+
+      .card button:hover {
+        opacity: 0.7;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            <span style="cursor:pointer" onclick="openNav()">Categories</span>
+          </a>
+          <a class="navbar-brand" href="#">
+            <div id="mySidenav" class="sidenav">
+              <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+              <a href="#">Mobile</a>
+              <a href="#">Fashion</a>
+              <a href="{% url 'Electronic_Product'%}">Electronics</a>
+              <a href="#">Home</a>
+              <div class="w3-dropdown-hover">
+                <a href="#" class="w3-button w3-black">Appliances</a>
+                <div class="w3-dropdown-hover">
+                  <div class="w3-dropdown-content w3-bar-block w3-border">
+                    <a href="#" class="w3-bar-item w3-button">Link 1</a>
+                    <a href="#" class="w3-bar-item w3-button">Link 2</a>
+                    <a href="#" class="w3-bar-item w3-button">Link 3</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="navbar-brand" href="#">ShopOnline</a>
+            <ul class="nav navbar-nav">
+              <li class="active">
+                <a href="{{user.file.url}}" target="_blank">
+                  <img src="{{user.file.url}}" style="width:40px; margin-top:5px;
+      height:40px; border-radius:40%;">
+                </a>
+              </li>
+              <li>
+                <a href="#">{{request.user.first_name}}&nbsp&nbsp{{request.user.last_name}}</a>
+              </li>
+              <li>
+                <a href="#" type="button" class="btn" data-target="#m1" id="myForm" data-toggle="modal" style="background-color:Blue;">Edit Profile</a>
+              </li>
+              <li>
+                <a href="{% url 'Website_View'%}" class="btn" type="button" style="background-color:green;">Back</a>
+              </li>
+              <div id="m1" class="modal fade">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header bg-warning"> Edit Profile <button class="close" data-dismiss="modal">&times</button>
+                    </div>
+                    <div class="modal-body">
+                      <center>
+                        <form style="background-color:black; padding-bottom:30px; margin-top:20px;" action="" method="post" enctype="multipart/form-data" style="width:50%; border-radius:2%; margin-top:50px;" id="formUpload" NOVALIDATE> {% csrf_token %} <h3>
+                            <u style="color:white;">
+                              <pre style="color:grey;">  Please Fill All Fields   </pre>
+                            </u>
+                          </h3>
+                          <label style="color:white; margin-top:20px;" name="first_name" class="fn">
+                            <h5>
+                              <i>First Name</i>
+                            </h5>
+                          </label>
+                          <a href="#" class="bar-item button">{{form.first_name}}</a>
+                          <br />
+                          <label style="color:white;" class="ln" name="last_name">
+                            <h5>
+                              <i>Last Name</i>
+                            </h5>
+                          </label>
+                          <a href="#" class="bar-item button">
+                            <span>{{form.last_name}}</span>
+                          </a>
+                          <br />
+                          <label style="color:white;" class="address">
+                            <h5>
+                              <i>Address</i>
+                            </h5>
+                          </label>
+                          <a href="#" class="bar-item button">&nbsp&nbsp&nbsp&nbsp&nbsp{{form.address}}</a>
+                          <br />
+                          <label style="color:white; margin-right:10px; margin-left:0;" class="phone">
+                            <h5>
+                              <i>Phone Number</i>
+                            </h5>
+                          </label>
+                          <a href="#" class="bar-item button">{{form.phone}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                          <br />
+                          <img id="myimage" src="{{user.file.url }}" class="form-group text-light" height="100px" width="100px" style="border-radius:50%; margin-left:20px; margin-top:20px;">
+                          <br />
+                          <br />
+                          <input name="file" onchange="readURL(this);" type="file" style="margin-bottom:20px;" accept="image/*" />
+                          <br />
+                          <input type="submit" value="Update" style=" margin-left:80px; width:20%;">
+                          <br />
+                        </form>
+                      </center>
+                    </div>
+                  </div>
+                  <div class="modal-footer"></div>
+                </div>
+              </div>
+              <li>
+                <a href="{% url 'change_password'%}">Change Password</a>
+              </li>
+              <ul class="nav navbar-nav navbar-right"></ul>
+            </ul>
+          </a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#" class="fa fa-bell" style="font-size:30px; margin-top:14px; color:white; text-decoration: none;"></a>
+          </li>
+          <li>
+            <a href="#" class="fa fa-shopping-cart" style="font-size:30px; margin-top:14px; color:white; text-decoration: none;"></a>
+          </li>
+          <li>
+            <a href="{%url 'Logout_View'%}">
+              <span class="glyphicon glyphicon-log-in" style="margin-top:12px; font-size:25px; color:white;"></span> Logout </a>
+          </li>
+        </ul>
+      </div>
+    </nav> {% for table in ProductTable %} <div>
+      <div class="card" style="margin-top:6%; margin-left:10px; float:left; width:250px;">
+        <img src="/media/{{table.product_image}}" alt="Denim Jeans" style="width:200px; height:200px;">
+        <h4>{{table.product_title}}</h4>
+        <p class="price">
+          <i class="fa fa-rupee">
+            <del style="font-size:20px;">{{table.product_original_price}}</del>
+          </i>&nbsp&nbsp&nbsp <i class="fa fa-rupee">{{table.product_discount_price}}</i>
+        </p>
+        <p>{{table.product_description|safe|truncatechars:30}}</p>
+        <a href="#">Read More</a>
+        <p>
+          <button>Add to Cart</button>
+        </p>
+        <p>
+          <button>Buy Now</button>
+        </p>
+      </div>
+    </div> {% endfor %} <script>
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            $('#myimage').attr('src', e.target.result);
+          };
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            $('#myimage').attr('src', e.target.result);
+          };
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+      var form_fields = document.getElementsByTagName('input')
+      form_fields[1].placeholder = '{{user.first_name}}';
+      form_fields[2].placeholder = '{{user.last_name}}';
+      form_fields[3].placeholder = '{{user.address}}';
+      form_fields[4].placeholder = '{{user.phone}}';
+      for (var field in form_fields) {
+        form_fields[field].className += 'form-group'
+      }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

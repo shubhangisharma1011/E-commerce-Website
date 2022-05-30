@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        table,th,tr,td{
+        border: 1px solid black;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Employee Table</title>
+</head>
+<body>
+<table>
+    <th>First Name</th>
+    <th>Middle Name</th>
+    <th>Last Name</th>
+    <th>Address</th>
+    <th>Experience</th>
+    <th>Designation</th>
+    <th>ID</th>
+    <th>Month Salary</th>
+    <th>Annum Salary</th>
+    <th>Provident Fund</th>
+    <th>Telephone</th>
+    <th>Mobile</th>
+    <th>Email</th>
+    <th>Tax</th>
+    <th>DOB</th>
+    <th>Country</th>
+    <th>State</th>
+    <th>City</th>
+    <th>District</th>
+    <th>Final Salary</th>
+    {% for forms in empform %}
+    <tr>
+        <td>{{forms.employee_firstname}}</td>
+        <td>{{forms.employee_middlename}}</td>
+        <td>{{forms.employee_lastname}}</td>
+        <td>{{forms.employee_address}}</td>
+        <td>{{forms.employee_experience}}</td>
+        <td>{{forms.employee_designation}}</td>
+        <td>{{forms.employee_id}}</td>
+        <td>{{forms.employee_monthsalary}}</td>
+        <td>{{forms.employee_per_annum_salary}}</td>
+        <td>{{forms.employee_pf}}</td>
+        <td>{{forms.employee_telephone}}</td>
+        <td>{{forms.employee_mobile}}</td>
+        <td>{{forms.employee_email}}</td>
+        <td>{{forms.employee_tax}}</td>
+        <td>{{forms.employee_dob}}</td>
+        <td>{{forms.employee_country}}</td>
+        <td>{{forms.employee_state}}</td>
+        <td>{{forms.employee_city}}</td>
+        <td>{{forms.employee_district}}</td>
+        <td>{{forms.finalsalary}}</td>
+
+    </tr>
+    {% endfor %}
+
+</table>
+</body>
+</html>
