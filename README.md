@@ -2,6 +2,7 @@
 In this project create a registration/login page with profile picture and after signup/registration then user access the Home page 
 in home page add to cart option is available and remove cart also use paypal paytm for payment method (project is just for practice purpose) also user can register using google, facebook
 Follow this steps to run the project:
+
 1)cd Online_Project
 
 2) pip install -r requirements.txt
